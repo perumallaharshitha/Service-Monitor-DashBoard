@@ -14,22 +14,22 @@ This dashboard displays **CPU usage, memory usage and service uptime** for serve
 ## Local Hosting
 
 1. **Clone the repo**
-git clone https://github.com/perumallaharshitha/Service-Monitor-DashBoard.git
-cd Service-Monitor-DashBoard
+- git clone https://github.com/perumallaharshitha/Service-Monitor-DashBoard.git
+- cd Service-Monitor-DashBoard
 
 2. **Start the Backend**
-cd backend
-npm install
-node server.js
+- cd backend
+- npm install
+- node server.js
 
 3. **Start the Frontend**
-cd ../frontend
-npm install
-npm run dev
+- cd ../frontend
+- npm install
+- npm run dev
 
 4. Open the LocalHost
 
 ## Live Demo
 
-Check the deployed project here:
-https://service-monitor-dashboard.vercel.app/
+- Check the deployed project here:
+- https://service-monitor-dashboard.vercel.app/
