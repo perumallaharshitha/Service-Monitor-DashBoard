@@ -3,11 +3,11 @@ export const fetchMetrics = async () => {
     const response = await fetch(
       "https://service-monitor-dashboard-1.onrender.com/api/metrics"
     );
-    if (!response.ok) throw new Error("Network response was not ok");
+    if (!response.ok) throw new Error("Network response not ok");
     const data = await response.json();
     return data;
-  } catch (error) {
-    console.error("Error fetching metrics:", error);
+  } catch (err) {
+    console.error("Error fetching metrics:", err);
     return null;
   }
 };

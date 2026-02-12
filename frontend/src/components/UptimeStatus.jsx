@@ -1,16 +1,19 @@
-import React from 'react';
+import React from "react";
 
-const UptimeStatus = ({ uptime }) => {
-    const hours = Math.floor(uptime / 3600);
-    const minutes = Math.floor((uptime % 3600) / 60);
-    const seconds = Math.floor(uptime % 60);
+function UptimeStatus({ uptime }) {
+  const formatUptime = (seconds) => {
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = Math.floor(seconds % 60);
+    return `${h}h ${m}m ${s}s`;
+  };
 
-    return (
-        <div>
-            <h3>Service Uptime</h3>
-            <p>{hours}h {minutes}m {seconds}s</p>
-        </div>
-    );
-};
+  return (
+    <div>
+      <h3>Service Uptime</h3>
+      <p>{formatUptime(uptime)}</p>
+    </div>
+  );
+}
 
 export default UptimeStatus;

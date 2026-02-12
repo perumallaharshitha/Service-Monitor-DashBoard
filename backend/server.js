@@ -1,19 +1,39 @@
-const express = require('express');
-const cors = require('cors');
-const metricsRoute = require('./routes/metrics');
+const express = require("express");
+const os = require("os");
+const cors = require("cors");
 
 const app = express();
-const PORT = 5000;
-
 app.use(cors());
-app.use(express.json());
 
-app.use('/api/metrics', metricsRoute);
+function getCpuLoad() {
+  const cpus = os.cpus();
+  let idle = 0, total = 0;
 
-app.get('/', (req, res) => {
-    res.send('Service Monitoring API is running!');
+  cpus.forEach(cpu => {
+    for (type in cpu.times) {
+      total += cpu.times[type];
+    }
+    idle += cpu.times.idle;
+  });
+
+  const usage = 1 - idle / total;
+  return parseFloat((usage * 100).toFixed(2));
+}
+
+function getMemoryUsage() {
+  const total = os.totalmem();
+  const free = os.freemem();
+  const usedPercent = ((total - free) / total) * 100;
+  return parseFloat(usedPercent.toFixed(2));
+}
+
+app.get("/api/metrics", (req, res) => {
+  res.json({
+    uptime: Math.floor(process.uptime()), 
+    avgCpuLoad: getCpuLoad(),
+    memoryUsagePercent: getMemoryUsage(),
+  });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
